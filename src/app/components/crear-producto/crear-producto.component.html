@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row mt-2">
+        <div class="col">
+            <h2 class="pt-3 pb-0 mb-0">{{titulo}}</h2>
+            <p class="pt-0 mt-0">{{subtitulo}}</p>
+        </div>
+    </div>
+</div>
+
+<!--PRODUCTOS-->
+<div class="container">
+    <div class="row">
+        <div class="col-5">
+            <form #productoNuevo="ngForm" (ngSubmit)="crearProducto(productoNuevo)" id="productoNuevo">
+                <label>Nombre del producto</label>
+                <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="producto.nombre">
+                <label for="d_breve">Descripción Breve</label>
+                <input type="text" class="form-control" name="d_breve" #d_breve="ngModel"
+                    [(ngModel)]="producto.d_breve">
+                <label for="descripcion">Descripción General</label>
+                <textarea type="text" class="form-control" name="descripcion" #descripcion="ngModel"
+                    [(ngModel)]="producto.descripcion">
+                </textarea>
+                <label for="codigo">Codigo Producto</label>
+                <input type="text" class="form-control" name="codigo" #codigo="ngModel" [(ngModel)]="producto.codigo">
+                <label for="categoria">Categoria</label>
+                <select type="text" class="form-control" name="categoria" #categoria="ngModel"
+                    [(ngModel)]="producto.categoria">
+                    <option value="MEDICO">Sistema Medico</option>
+                    <option value="BUCEO">Sistema Buceo</option>
+                    <option value="COMPONENTE">Componente</option>
+                </select>
+                <label for="imagen">Imagen</label>
+                <input type="text" class="form-control" name="imagen" #imagen="ngModel" [(ngModel)]="producto.imagen">
+                <button class="btn btn-primary btn-block mt-3" *ngIf="!editar">CREAR PRODUCTO</button>
+                <button class="btn btn-primary btn-block mt-3" *ngIf="editar">EDITAR PRODUCTO</button>
+            </form>
+        </div>
+    </div>
+</div>

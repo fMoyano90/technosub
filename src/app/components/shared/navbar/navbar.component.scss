@@ -1,0 +1,16 @@
+@import '../../variables';
+
+/*Prenav*/
+#prenav {
+    background-color: $azul2;
+    color: white;
+}
+
+#logo {
+    height: 90px;
+    width: 160px;
+}
+
+#navbarDropdownMenuLink {
+    cursor: pointer;
+}

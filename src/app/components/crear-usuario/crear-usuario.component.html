@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 pt-4">
+            <h1><i class="fas fa-user-plus"></i> Nuevo Usuario</h1>
+            <p>Crear nuevo usuario para administrar sitio web</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-5">
+            <form #registerForm="ngForm" (ngSubmit)="crearUsuario(registerForm)" id="formularioRegistro">
+                <label>Nombre y Apellido</label>
+                <input name="nombre" #nombre="ngModel" [(ngModel)]="usuario.nombre" type="text" class="form-control"
+                    required>
+                <label>Email</label>
+                <input name="email" #email="ngModel" [(ngModel)]="usuario.email" type="email" class="form-control"
+                    required>
+                <label>Rol</label>
+                <select class="form-control" name="role" #role="ngModel" [(ngModel)]="usuario.role" required>
+                    <option value="USER_ROLE">Usuario</option>
+                    <option value="ADMIN_ROLE">Administrador</option>
+                </select>
+                <label>Contraseña</label>
+                <input name="password" #password="ngModel" [(ngModel)]="usuario.password" type="password"
+                    class="form-control" required>
+                <label>Confirmar Contraseña</label>
+                <input name="passConfirm" #passConfirm="ngModel" [(ngModel)]="password2" type="password"
+                    class="form-control" required>
+                <button type="submit" class="btn btn-block btn-primary" [disabled]="registerForm.invalid">CREAR
+                    USUARIO</button>
+            </form>
+        </div>
+        <div class="offset-1 col-5">
+            <div class="card bg-primary text-white">
+                <div class="card-header">
+                    <i class="fa fa-info" aria-hidden="true"></i> Información
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title"> Roles</h2>
+                    <h5><b>Usuario:</b> Tiene privilegios límitados, puede añadir y editar productos y noticias.</h5>
+                    <h5><b>Administrador:</b>
+                        Tiene todos los privilegios, puede añadir, editar y eliminar, usuarios, productos
+                        y noticias.</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

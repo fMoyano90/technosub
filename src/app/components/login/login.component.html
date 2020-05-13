@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="offset-4 col-4" id="login">
+            <h3>BIENVENIDO</h3>
+            <p>INGRESA CON TUS CREDENCIALES</p>
+            <form class="form-row" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+                <label for="email">Email</label>
+                <input type="email" name="email" #email="ngModel" [(ngModel)]="usuario.email" class="form-control"
+                    required autofocus>
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" #password="ngModel"
+                    [(ngModel)]="usuario.password" required>
+                <button class="btn btn-primary btn-block mt-4">
+                    INGRESAR
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

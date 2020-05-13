@@ -1,0 +1,38 @@
+<!--BRAND-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex justify-content-end align-items-center pt-2 pr-4" id="brand">
+            <h3>COMPONENTES Y REPUESTOS</h3>
+        </div>
+    </div>
+</div>
+
+<!--CABECERA-->
+<header class="d-flex justify-content-center align-items-center text-center" id="h-componentes">
+    <h3><b>TECHNOSUB</b> suministra una amplia gama de componentes y repuestos<br> tanto para sistemas medicos
+        hiperbaricos como de
+        buceo industrial
+    </h3>
+</header>
+
+<!--COMPONENTES Y REPUESTOS-->
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-4" *ngFor="let componente of componentes">
+            <div class="card">
+                <img src="assets/images/CXTNR3dWYAAxf5c.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{componente.nombre}}<br><small>COD: {{componente.codigo}}</small></h5>
+                    <p class="card-text">{{componente.d_breve}}</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-primary btn-block">
+                            VER DETALLES
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

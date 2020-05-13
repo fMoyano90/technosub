@@ -1,0 +1,32 @@
+<!--HEADER-->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Nueva Noticia</h1>
+            <p>Sube una noticia o un artículos de interés.</p>
+        </div>
+    </div>
+</div>
+
+<!--FORMULARIO CREAR NOTICIA-->
+<div class="container">
+    <div class="row">
+        <div class="col-5">
+            <form #noticiaNueva="ngForm" (ngSubmit)="crearNoticia(noticiaNueva)" id="noticiaNueva">
+                <label for="titulo"></label>
+                <input name="titulo" #titulo="ngModel" [(ngModel)]="noticia.titulo" type="text" class="form-control">
+                <label for="t_breve"></label>
+                <input name="t_breve" #t_breve="ngModel" [(ngModel)]="noticia.t_breve" type="text" class="form-control">
+                <label for="cuerpo"></label>
+                <input name="cuerpo" #cuerpo="ngModel" [(ngModel)]="noticia.cuerpo" type="text" class="form-control">
+                <label for="autor"></label>
+                <input name="autor" #autor="ngModel" [(ngModel)]="noticia.autor" type="text" class="form-control">
+                <label for="categoria"></label>
+                <input name="categoria" #categoria="ngModel" [(ngModel)]="noticia.categoria" type="text"
+                    class="form-control">
+                <button class="btn btn-primary btn-block mt-3" *ngIf="!editar">CREAR NOTICIA</button>
+                <button class="btn btn-primary btn-block mt-3" *ngIf="editar">EDITAR NOTICIA</button>
+            </form>
+        </div>
+    </div>
+</div>

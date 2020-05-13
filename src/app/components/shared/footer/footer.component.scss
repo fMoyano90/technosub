@@ -1,0 +1,40 @@
+footer {
+    background-color: #cccccc;
+    padding-top: 40px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+}
+
+.enlaces {
+    li {
+        list-style: none;
+
+        a {
+
+            color: black;
+        }
+    }
+}
+
+.redes-sociales {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    li {
+        list-style: none;
+
+        a {
+            img {
+
+                height: 25px;
+            }
+        }
+    }
+}
+
+#login {
+    margin-top: 100px;
+}

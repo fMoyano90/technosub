@@ -1,0 +1,66 @@
+<!--BRAND-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex justify-content-end align-items-center pt-2 pr-4" id="brand">
+            <h3>NOTICIAS</h3>
+        </div>
+    </div>
+</div>
+
+<!--CABECERA-->
+<header class="d-flex justify-content-center align-items-center text-center" id="h-componentes">
+    <h3>Descubrá los beneficios reales de la medicina hiperbárica<br>
+        y mantengase al día con todos los avances tecnologicos
+    </h3>
+</header>
+
+
+<!--PRINCIPAL-->
+<div class="container">
+    <div class="row mt-5">
+        <!--NOTICIAS-->
+        <div class="col-9">
+            <!--NOTICIA-->
+            <div class="card mb-5" *ngFor="let noticia of noticias | paginate: { itemsPerPage: 4, currentPage: p }">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="assets/images/about_223.jpg" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{noticia.titulo}}</h5>
+                            <p class="card-text">{{noticia.cuerpo}}</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary">Ver Más</button>
+                                <p class="card-text"><small class="text-muted">{{noticia.created_at | date}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+                </pagination-controls>
+            </div>
+        </div>
+
+        <!--SIDEBAR-->
+        <div class="col-3 text-center" id="categorias">
+            <h5>CATEGORIAS</h5>
+            <ul>
+                <li><a [routerLink]="['/producto/']">Sistemas Hiperbaricos Medicos</a></li>
+                <li><a [routerLink]="['/producto/']">Sistemas Buceo Industrial</a></li>
+            </ul>
+            <!--NOTICIA DESTACADA-->
+            <h5 class="mb-3">NOTICIAS DESTACADAS</h5>
+            <div class="card mb-4" *ngFor="let noticia of noticiasPrincipales">
+                <img src="assets/images/about_1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{noticia.titulo}}</h5>
+                    <p class="card-text">{{noticia.t_breve}}</p>
+                    <a href="#" class="btn btn-primary">Ver Más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

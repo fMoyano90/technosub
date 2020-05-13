@@ -1,0 +1,40 @@
+<!--BRAND-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex justify-content-end align-items-center pt-2 pr-4" id="brand">
+            <h3>SISTEMAS HIPERBARICOS MEDICOS</h3>
+        </div>
+    </div>
+</div>
+
+<!--CABECERA-->
+<header class="d-flex justify-content-center align-items-center text-center" id="h-componentes">
+    <h3><b>TECHNOSUB</b> puede diseñar y fabricar sistemas hiperbaricos completos,<br>
+        desde sistemas modulares transportables hasta sistemas integrados
+    </h3>
+</header>
+
+<!--PRODUCTOS-->
+<div class="container">
+    <!--PRODUCTO-->
+    <div class="row mt-5" *ngFor="let producto of productos | paginate: { itemsPerPage: 3, currentPage: p }">
+        <div class="col-6 text-center">
+            <img src="assets/images/hyperbaric.png" class="img-fluid">
+        </div>
+        <div class="col-6" id="t-producto">
+            <h2>{{producto.nombre}}</h2>
+            <p>COD: {{producto.codigo}}</p>
+            <p>{{producto.descripcion}}</p>
+            <div class="text-center mt-5">
+                <button class="btn btn-primary">
+                    VER DETALLES
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12 text-center">
+        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+        </pagination-controls>
+    </div>
+</div>
