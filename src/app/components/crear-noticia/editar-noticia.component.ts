@@ -1,23 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Noticia } from 'src/app/models/noticia';
-import { NoticiaService } from '../../services/noticia.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { Noticia } from '../../models/noticia';
+import { NoticiaService } from 'src/app/services/noticia.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { global } from '../../services/global';
 import { AngularFileUploaderComponent } from 'angular-file-uploader';
+import { global } from '../../services/global';
 
 @Component({
-  selector: 'app-crear-noticia',
+  selector: 'app-editar-noticia',
   templateUrl: './crear-noticia.component.html',
   styleUrls: ['./crear-noticia.component.scss'],
   providers: [NoticiaService, UsuarioService],
 })
-export class CrearNoticiaComponent implements OnInit {
+export class EditarNoticiaComponent implements OnInit {
   public noticia: Noticia;
   public tituloPrincipal: string;
   public subtitulo: string;
-  public editar = false;
+  public editar: boolean;
   public resetVar: any;
 
   public editorConfig: AngularEditorConfig = {
@@ -92,41 +93,62 @@ export class CrearNoticiaComponent implements OnInit {
   private fileUpload1: AngularFileUploaderComponent;
 
   constructor(
-    private noticiaService: NoticiaService,
-    private usuarioService: UsuarioService
+    private productoService: NoticiaService,
+    private usuarioService: UsuarioService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.noticia = new Noticia(1, '', '', '', '', '', '', '');
   }
 
   ngOnInit(): void {
-    this.tituloPrincipal = 'Crear Noticia';
-    this.subtitulo = 'Crea una nueva noticia.';
+    this.tituloPrincipal = 'Editar Noticia';
+    this.subtitulo = 'Edita una noticia existente.';
+    this.editar = true;
+    this.obtenerNoticia();
   }
 
+  // OBTENER NOTICIA POR ID
+  obtenerNoticia() {
+    this.route.params.subscribe((params) => {
+      const token = this.usuarioService.getToken();
+      const id = params['id'];
+      this.productoService.getNoticia(token, id).subscribe(
+        (resp) => {
+          this.noticia = resp['noticia'];
+          console.log(resp);
+        },
+        (err) => {
+          console.log(err as any);
+        }
+      );
+    });
+  }
+
+  // EDITAR PRODUCTO (PROBAR ACTUALIZAR)
   crearNoticia(noticia) {
     const token = this.usuarioService.getToken();
-    console.log(this.noticia);
-    this.noticiaService.create(token, this.noticia).subscribe(
-      (resp) => {
-        console.log(resp['estado']);
-        // PRODUCTO CREADO EXITOSAMENTE
-        Swal.fire({
-          icon: 'success',
-          title: '¡Buen trabajo!',
-          text: 'La noticia se creo exitosamente.',
-        });
-        noticia.reset();
-      },
-      (error) => {
-        // ERROR
-        Swal.fire({
-          icon: 'error',
-          title: 'Ups...',
-          text: 'Ocurrio un problema, intenta más tarde.',
-        });
-        console.log(error as any);
-      }
-    );
+    this.route.params.subscribe((params) => {
+      const id = params['id'];
+      this.productoService.update(token, id, this.noticia).subscribe(
+        (resp) => {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Buen trabajo!',
+            text: 'La noticia se actualizo exitosamente.',
+          });
+          noticia.reset();
+          this.fileUpload1.resetFileUpload();
+        },
+        (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Ups...',
+            text: 'Ocurrio un error, intenta mas tarde.',
+          });
+        }
+      );
+    });
   }
 
   // Subir imagen

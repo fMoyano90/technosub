@@ -31,7 +31,9 @@
                     <option value="COMPONENTE">Componente</option>
                 </select>
                 <label for="imagen">Imagen</label>
-                <input type="text" class="form-control" name="imagen" #imagen="ngModel" [(ngModel)]="producto.imagen">
+                <angular-file-uploader #fileUpload1 [config]="afuConfig" [resetUpload]="resetVar"
+                    (ApiResponse)="imageUpload($event)" style="cursor: pointer;">
+                </angular-file-uploader>
                 <button class="btn btn-primary btn-block mt-3" *ngIf="!editar">CREAR PRODUCTO</button>
                 <button class="btn btn-primary btn-block mt-3" *ngIf="editar">EDITAR PRODUCTO</button>
             </form>

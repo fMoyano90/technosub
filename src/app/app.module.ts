@@ -3,6 +3,9 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { CommonModule } from '@angular/common';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 
 // Configuración para Chile
 import { registerLocaleData } from '@angular/common';
@@ -31,6 +34,11 @@ import { EditarProductoComponent } from './components/crear-producto/editar-prod
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { NoticiaComponent } from './components/noticia/noticia.component';
 import { ProductoComponent } from './components/producto/producto.component';
+import { EditarNoticiaComponent } from './components/crear-noticia/editar-noticia.component';
+import { CategoriaNoticiasComponent } from './components/categoria-noticias/categoria-noticias.component';
+import { CategoriaPipe } from './pipes/categoria.pipe';
+import { CrearSocioComponent } from './components/crear-socio/crear-socio.component';
+import { EditarSocioComponent } from './components/crear-socio/editar-socio.component';
 
 @NgModule({
   declarations: [
@@ -47,18 +55,26 @@ import { ProductoComponent } from './components/producto/producto.component';
     SociosComponent,
     UsuariosComponent,
     CrearNoticiaComponent,
+    EditarNoticiaComponent,
     CrearProductoComponent,
     EditarProductoComponent,
     CrearUsuarioComponent,
     NoticiaComponent,
     ProductoComponent,
+    CategoriaNoticiasComponent,
+    CategoriaPipe,
+    CrearSocioComponent,
+    EditarSocioComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     APP_ROUTING,
-    FormsModule,
     HttpClientModule,
     NgxPaginationModule,
+    AngularEditorModule,
+    CommonModule,
+    AngularFileUploaderModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es-Cl' }],
   bootstrap: [AppComponent],

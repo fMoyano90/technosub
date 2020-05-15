@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row mt-2">
+        <div class="col">
+            <h2 class="pt-3 pb-0 mb-0">{{titulo}}</h2>
+            <p class="pt-0 mt-0">{{subtitulo}}</p>
+        </div>
+    </div>
+</div>
+
+<!--PRODUCTOS-->
+<div class="container">
+    <div class="row">
+        <div class="col-5">
+            <form #socioNuevo="ngForm" (ngSubmit)="crearSocio(socioNuevo)" id="socioNuevo">
+                <label>Nombre Socio</label>
+                <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="socio.nombre">
+                <label for="descripcion">Descripción Empresa</label>
+                <input type="text" class="form-control" name="descripcion" #descripcion="ngModel"
+                    [(ngModel)]="socio.descripcion">
+                <label for="descripcion">Enlace</label>
+                <input type="text" class="form-control" name="enlace" #enlace="ngModel" [(ngModel)]="socio.enlace">
+                <label for="imagen">Imagen</label>
+                <angular-file-uploader #fileUpload1 [config]="afuConfig" [resetUpload]="resetVar"
+                    (ApiResponse)="imageUpload($event)" style="cursor: pointer;">
+                </angular-file-uploader>
+                <button class="btn btn-primary btn-block mt-3" *ngIf="!editar">CREAR SOCIO</button>
+                <button class="btn btn-primary btn-block mt-3" *ngIf="editar">EDITAR SOCIO</button>
+            </form>
+        </div>
+    </div>
+</div>

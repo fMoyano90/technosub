@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { global } from './global';
-import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -39,7 +37,7 @@ export class NoticiaService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('Authorization', token);
-    return this._http.delete(this.url + 'producto/' + id, {
+    return this._http.delete(this.url + 'noticia/' + id, {
       headers,
     });
   }

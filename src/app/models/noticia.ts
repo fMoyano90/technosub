@@ -7,6 +7,7 @@ export class Noticia {
     public autor: string,
     public imagen: string,
     public categoria: string,
+    public prioridad: string,
     public created_at?: Date
   ) {}
 }

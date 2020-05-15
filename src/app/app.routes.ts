@@ -14,6 +14,10 @@ import { NoticiasComponent } from './components/noticias/noticias.component';
 import { NoticiaComponent } from './components/noticia/noticia.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { EditarProductoComponent } from './components/crear-producto/editar-producto.component';
+import { EditarNoticiaComponent } from './components/crear-noticia/editar-noticia.component';
+import { CategoriaNoticiasComponent } from './components/categoria-noticias/categoria-noticias.component';
+import { CrearSocioComponent } from './components/crear-socio/crear-socio.component';
+import { EditarSocioComponent } from './components/crear-socio/editar-socio.component';
 
 const APP_ROUTES: Routes = [
   // PAGINAS PUBLICAS
@@ -27,6 +31,10 @@ const APP_ROUTES: Routes = [
   { path: 'producto/:id', component: ProductoComponent },
   { path: 'noticias', component: NoticiasComponent },
   { path: 'noticia/:id', component: NoticiaComponent },
+  {
+    path: 'noticias/categoria/:categoria',
+    component: CategoriaNoticiasComponent,
+  },
   { path: 'socios', component: SociosComponent },
   { path: 'contacto', component: ContactoComponent },
 
@@ -38,10 +46,13 @@ const APP_ROUTES: Routes = [
   { path: 'crear-usuario', component: CrearUsuarioComponent },
   // NOTICIAS
   { path: 'crear-noticia', component: CrearNoticiaComponent },
-  { path: 'editar-noticia/:id', component: CrearNoticiaComponent },
+  { path: 'editar-noticia/:id', component: EditarNoticiaComponent },
   // PRODUCTOS
   { path: 'crear-producto', component: CrearProductoComponent },
   { path: 'editar-producto/:id', component: EditarProductoComponent },
+  // SOCIOS
+  { path: 'crear-socio', component: CrearSocioComponent },
+  { path: 'editar-socio/:id', component: EditarSocioComponent },
   // GLOBAL
   { path: '**', pathMatch: 'full', redirectTo: '/inicio' },
 ];

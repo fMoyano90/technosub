@@ -21,17 +21,30 @@
     <div class="row mt-5">
         <div class="col-4" *ngFor="let componente of componentes">
             <div class="card">
-                <img src="assets/images/CXTNR3dWYAAxf5c.jpg" class="card-img-top" alt="...">
+                <img src="{{ url + 'producto/imagen/' + componente.imagen }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{componente.nombre}}<br><small>COD: {{componente.codigo}}</small></h5>
                     <p class="card-text">{{componente.d_breve}}</p>
-                    <div class="text-center">
-                        <a href="#" class="btn btn-primary btn-block">
-                            VER DETALLES
-                        </a>
+                    <div class="d-flex justify-content-center">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button [routerLink]="['/producto/', componente.id ]" type="button"
+                                class="btn btn-primary">VER MÁS</button>
+                            <button *ngIf="identity" [routerLink]="['/editar-producto', componente.id]" type="button"
+                                class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button *ngIf="identity" type="button" class="btn btn-danger"
+                                (click)="eliminarComponente(componente.id)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-12 text-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+            </pagination-controls>
         </div>
     </div>
 

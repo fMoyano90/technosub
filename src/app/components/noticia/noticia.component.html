@@ -1,0 +1,57 @@
+<!--BRAND-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex justify-content-end align-items-center pt-2 pr-4" id="brand">
+            <h3>NOTICIAS</h3>
+        </div>
+    </div>
+</div>
+
+<!--CABECERA-->
+<header class="d-flex justify-content-center align-items-center text-center" id="h-componentes" *ngIf="noticia">
+    <h3>{{noticia.titulo}}</h3>
+</header>
+
+
+<!--PRINCIPAL-->
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-8 bg-white p-4" *ngIf="noticia" id="noticia">
+            <!--NOTICIA-->
+            <h2>{{noticia.titulo}}</h2>
+            <div class="d-flex justify-content-between">
+                <p><small>Por {{noticia.autor}}</small></p>
+                <p><small>{{noticia.created_at | date}}</small></p>
+            </div>
+            <img src="{{ url + 'noticia/imagen/' + noticia.imagen }}" class="card-img">
+            <p><small>{{noticia.t_breve}}</small></p>
+
+            <p>{{noticia.cuerpo}}</p>
+
+        </div>
+
+        <!--SIDEBAR-->
+        <div class="offset-1 col-3 text-center" id="categorias">
+            <h5>CATEGORIAS</h5>
+            <ul>
+                <li><a [routerLink]="['/noticias/categoria/medicina']">Sistemas Hiperbaricos Medicos</a></li>
+                <li><a [routerLink]="['/noticias/categoria/buceo']">Sistemas Buceo Industrial</a></li>
+            </ul>
+            <!--NOTICIA DESTACADA-->
+            <h5 class="mb-3">NOTICIAS DESTACADAS</h5>
+            <div class="card mb-4" *ngFor="let noticia of noticiasPrincipales">
+                <img src="{{ url + 'noticia/imagen/' + noticia.imagen }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{noticia.titulo}}</h5>
+                    <p class="card-text">{{noticia.t_breve}}</p>
+                    <div class="d-flex justify-content-center">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button [routerLink]="['/noticia/' + noticia.id]" type="button" class="btn btn-primary">VER
+                                MÁS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

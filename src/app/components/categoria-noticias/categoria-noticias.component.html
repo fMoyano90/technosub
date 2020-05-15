@@ -9,9 +9,7 @@
 
 <!--CABECERA-->
 <header class="d-flex justify-content-center align-items-center text-center" id="h-componentes">
-    <h3>Descubrá los beneficios reales de la medicina hiperbárica<br>
-        y mantengase al día con todos los avances tecnologicos
-    </h3>
+    <h3>{{categoria | categoria}}</h3>
 </header>
 
 
@@ -33,8 +31,7 @@
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex justify-content-center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button [routerLink]="['/noticia/' + noticia.id]" type="button"
-                                            class="btn btn-primary">VER MÁS</button>
+                                        <button type="button" class="btn btn-primary">VER MÁS</button>
                                         <button *ngIf="identity" [routerLink]="['/editar-noticia', noticia.id]"
                                             type="button" class="btn btn-warning">
                                             <i class="fas fa-edit"></i>

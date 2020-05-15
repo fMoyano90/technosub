@@ -26,28 +26,31 @@
                 <h3>PONTE EN CONTACTO AHORA</h3>
                 <p>En menos de <b>24 horas</b> te contactaremos.</p>
             </div>
-            <form class="form-row">
+            <form class="form-row" #nuevoContacto (ngSubmit)="enviarCorreo(nuevoContacto)" id="nuevoContacto">
                 <div class="col-6 d-flex flex-column form-group">
                     <label>Nombre</label>
-                    <input class="form-control">
+                    <input class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="correo.nombre">
                 </div>
                 <div class="col-6 d-flex flex-column form-group">
                     <label>Apellido</label>
-                    <input class="form-control">
+                    <input class="form-control" name="apellido" #apellido="ngModel" [(ngModel)]="correo.apellido">
                 </div>
                 <div class="col-6 d-flex flex-column form-group">
                     <label>Télefono</label>
-                    <input class="form-control">
+                    <input class="form-control" name="telefono" #telefono="ngModel" [(ngModel)]="correo.telefono">
                 </div>
                 <div class="col-6 d-flex flex-column form-group">
                     <label>Email</label>
-                    <input class="form-control">
+                    <input class="form-control" name="email" #email="ngModel" [(ngModel)]="correo.email" required>
                 </div>
                 <div class="col-12 d-flex flex-column form-group">
                     <label>Mensaje</label>
-                    <textarea class="form-control" rows="5"></textarea>
-                    <button class="btn btn-primary btn-block mt-3">
-                        <i class="fa fa-paper-plane" aria-hidden="true"></i> ENVIAR
+                    <textarea class="form-control" rows="5" name="mensaje" #mensaje="ngModel"
+                        [(ngModel)]="correo.mensaje"></textarea>
+                    <button class="btn btn-primary btn-block mt-3" [disabled]="nuevoContacto.invalid">
+                        <span *ngIf="!cargando"><i class="fa fa-paper-plane" aria-hidden="true"></i> ENVIAR</span>
+                        <span *ngIf="cargando"><i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size:18px"></i>
+                            Enviando solicitud...</span>
                     </button>
                 </div>
             </form>

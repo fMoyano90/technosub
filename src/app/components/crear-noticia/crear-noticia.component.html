@@ -1,9 +1,9 @@
 <!--HEADER-->
 <div class="container">
     <div class="row">
-        <div class="col-12">
-            <h1>Nueva Noticia</h1>
-            <p>Sube una noticia o un artículos de interés.</p>
+        <div class="col-12 mt-3">
+            <h1>{{tituloPrincipal}}</h1>
+            <p>{{subtitulo}}</p>
         </div>
     </div>
 </div>
@@ -11,21 +11,43 @@
 <!--FORMULARIO CREAR NOTICIA-->
 <div class="container">
     <div class="row">
-        <div class="col-5">
-            <form #noticiaNueva="ngForm" (ngSubmit)="crearNoticia(noticiaNueva)" id="noticiaNueva">
-                <label for="titulo"></label>
-                <input name="titulo" #titulo="ngModel" [(ngModel)]="noticia.titulo" type="text" class="form-control">
-                <label for="t_breve"></label>
-                <input name="t_breve" #t_breve="ngModel" [(ngModel)]="noticia.t_breve" type="text" class="form-control">
-                <label for="cuerpo"></label>
-                <input name="cuerpo" #cuerpo="ngModel" [(ngModel)]="noticia.cuerpo" type="text" class="form-control">
-                <label for="autor"></label>
-                <input name="autor" #autor="ngModel" [(ngModel)]="noticia.autor" type="text" class="form-control">
-                <label for="categoria"></label>
-                <input name="categoria" #categoria="ngModel" [(ngModel)]="noticia.categoria" type="text"
-                    class="form-control">
-                <button class="btn btn-primary btn-block mt-3" *ngIf="!editar">CREAR NOTICIA</button>
-                <button class="btn btn-primary btn-block mt-3" *ngIf="editar">EDITAR NOTICIA</button>
+        <div class="col-12">
+            <form #noticiaNueva="ngForm" (ngSubmit)="crearNoticia(noticiaNueva)" id="noticiaNueva" class="form-row">
+                <div class="col-3">
+                    <label for="titulo">TÍtulo</label>
+                    <input name="titulo" #titulo="ngModel" [(ngModel)]="noticia.titulo" type="text"
+                        class="form-control">
+                    <label for="t_breve">Texto Breve</label>
+                    <input name="t_breve" #t_breve="ngModel" [(ngModel)]="noticia.t_breve" type="text"
+                        class="form-control">
+                    <label for="autor">Autor</label>
+                    <input name="autor" #autor="ngModel" [(ngModel)]="noticia.autor" type="text" class="form-control">
+                    <label for="categoria">Categoria</label>
+                    <select name="categoria" #categoria="ngModel" [(ngModel)]="noticia.categoria" type="text"
+                        class="form-control">
+                        <option value="MEDICINA">Sistemas Hiperbaricos Medicos</option>
+                        <option value="BUCEO">Sistemas Buceo Industrial</option>
+                    </select>
+                    <label for="prioridad">Prioridad</label>
+                    <select name="prioridad" #prioridad="ngModel" [(ngModel)]="noticia.prioridad" type="text"
+                        class="form-control">
+                        <option value="PRINCIPAL">Principal</option>
+                        <option value="GENERAL">General</option>
+                    </select>
+                    <label for="imagen">Imagen</label>
+                    <angular-file-uploader #fileUpload1 [config]="afuConfig" [resetUpload]="resetVar"
+                        (ApiResponse)="imageUpload($event)" style="cursor: pointer;">
+                    </angular-file-uploader>
+                </div>
+                <div class="offset-1 col-8 bg-white">
+
+                    <angular-editor [placeholder]="'Escribe la noticia...'" [config]="editorConfig" name="cuerpo"
+                        #cuerpo="ngModel" [(ngModel)]="noticia.cuerpo" type="text">
+                    </angular-editor>
+                    <button class="btn btn-primary btn-block mt-3" *ngIf="!editar">CREAR NOTICIA</button>
+                    <button class="btn btn-primary btn-block mt-3" *ngIf="editar">EDITAR NOTICIA</button>
+                </div>
+
             </form>
         </div>
     </div>

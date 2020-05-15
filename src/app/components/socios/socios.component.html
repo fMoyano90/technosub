@@ -1,3 +1,12 @@
+<!--BRAND-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex justify-content-end align-items-center pt-2 pr-4" id="brand">
+            <h3>SOCIOS</h3>
+        </div>
+    </div>
+</div>
+
 <!--CABECERA-->
 <header class="d-flex justify-content-center align-items-center text-center" id="h-componentes">
     <h3>ENLACES Y SOCIOS DE TECHNOSUB
@@ -7,101 +16,34 @@
 <!--ENLACES Y SOCIOS-->
 <div class="container">
     <div class="row mt-5">
-        <div class="col-3">
+        <div class="col-3" *ngFor="let socio of socios | paginate: { itemsPerPage: 8, currentPage: p }">
             <div class="card mb-4 text-center">
-                <img src="assets/images/logo-technosub.png" class="card-img-top p-3" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Más detalles</a>
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ url + 'socio/imagen/' + socio.imagen }}" class="card-img-top p-3 imagenSocio"
+                            alt="...">
+                    </div>
+                    <h3 class="card-title">{{socio.nombre}}</h3>
+                    <p class="card-text">{{socio.descripcion}}</p>
+                    <div class="d-flex justify-content-center">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary">IR A SITIO WEB</button>
+                            <button *ngIf="identity" [routerLink]="['/editar-socio', socio.id]" type="button"
+                                class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button *ngIf="identity" type="button" class="btn btn-danger"
+                                (click)="eliminarSocio(socio.id)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-3">
-            <div class="card mb-4 text-center">
-                <img src="assets/images/logo-technosub.png" class="card-img-top p-3" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Más detalles</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card mb-4 text-center">
-                <img src="assets/images/logo-technosub.png" class="card-img-top p-3" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Más detalles</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card mb-4 text-center">
-                <img src="assets/images/logo-technosub.png" class="card-img-top p-3" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Más detalles</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card mb-4 text-center">
-                <img src="assets/images/logo-technosub.png" class="card-img-top p-3" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Más detalles</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card mb-4 text-center">
-                <img src="assets/images/logo-technosub.png" class="card-img-top p-3" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Más detalles</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card mb-4 text-center">
-                <img src="assets/images/logo-technosub.png" class="card-img-top p-3" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Más detalles</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card mb-4 text-center">
-                <img src="assets/images/logo-technosub.png" class="card-img-top p-3" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Más detalles</a>
-                </div>
-            </div>
+        <div class="col-12 text-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+            </pagination-controls>
         </div>
     </div>
 </div>

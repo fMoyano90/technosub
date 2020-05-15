@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Producto } from '../../models/producto';
-import { ProductoService } from 'src/app/services/producto.service';
+import { Socio } from '../../models/socio';
+import { SocioService } from 'src/app/services/socio.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -8,13 +8,13 @@ import { AngularFileUploaderComponent } from 'angular-file-uploader';
 import { global } from '../../services/global';
 
 @Component({
-  selector: 'app-editar-producto',
-  templateUrl: './crear-producto.component.html',
-  styleUrls: ['./crear-producto.component.scss'],
-  providers: [ProductoService, UsuarioService],
+  selector: 'app-editar-socio',
+  templateUrl: './crear-socio.component.html',
+  styleUrls: ['./crear-socio.component.scss'],
+  providers: [SocioService, UsuarioService],
 })
-export class EditarProductoComponent implements OnInit {
-  public producto: Producto;
+export class EditarSocioComponent implements OnInit {
+  public socio: Socio;
   public titulo: string;
   public subtitulo: string;
   public editar: boolean;
@@ -25,7 +25,7 @@ export class EditarProductoComponent implements OnInit {
     formatsAllowed: '.jpg, .png, .gif, .jpeg',
     maxSize: '50',
     uploadAPI: {
-      url: global.url + 'producto/upload',
+      url: global.url + 'socio/upload',
       headers: {
         Authorization: this.usuarioService.getToken(),
       },
@@ -49,28 +49,29 @@ export class EditarProductoComponent implements OnInit {
   private fileUpload1: AngularFileUploaderComponent;
 
   constructor(
-    private productoService: ProductoService,
+    private socioService: SocioService,
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.producto = new Producto(1, '', '', '', '', '', '');
+    this.socio = new Socio(1, '', '', '', '');
   }
 
   ngOnInit(): void {
-    this.titulo = 'Editar Producto';
-    this.subtitulo = 'Edita un producto existente.';
+    this.titulo = 'Editar Socio';
+    this.subtitulo = 'Edita un socio existente.';
     this.editar = true;
-    this.obtenerProducto();
+    this.obtenerSocio();
   }
 
   // OBTENER PRODUCTO POR ID
-  obtenerProducto() {
+  obtenerSocio() {
     this.route.params.subscribe((params) => {
+      const token = this.usuarioService.getToken();
       const id = params['id'];
-      this.productoService.getProducto(id).subscribe(
+      this.socioService.getSocio(token, id).subscribe(
         (resp) => {
-          this.producto = resp['producto'];
+          this.socio = resp['socio'];
         },
         (err) => {
           console.log(err as any);
@@ -80,19 +81,17 @@ export class EditarProductoComponent implements OnInit {
   }
 
   // EDITAR PRODUCTO (PROBAR ACTUALIZAR)
-  crearProducto(producto) {
+  crearSocio(socio) {
     const token = this.usuarioService.getToken();
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      this.productoService.update(token, id, this.producto).subscribe(
+      this.socioService.update(token, id, this.socio).subscribe(
         (resp) => {
           Swal.fire({
             icon: 'success',
             title: '¡Buen trabajo!',
-            text: 'El producto se actualizo exitosamente.',
+            text: 'El socio se actualizo exitosamente.',
           });
-          producto.reset();
-          this.fileUpload1.resetFileUpload();
         },
         (err) => {
           Swal.fire({
@@ -108,6 +107,6 @@ export class EditarProductoComponent implements OnInit {
   // Subir imagen
   imageUpload(data) {
     const image_data = JSON.parse(data.response);
-    this.producto.imagen = image_data.imagen;
+    this.socio.imagen = image_data.imagen;
   }
 }

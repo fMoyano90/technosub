@@ -66,10 +66,11 @@ export class ProductoService {
   }
 
   // OBTENER PRODDUCTO POR ID
-  getProducto(token, id) {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/x-www-form-urlencoded')
-      .set('Authorization', token);
+  getProducto(id) {
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/x-www-form-urlencoded'
+    );
     return this._http.get(this.url + 'producto/' + id, { headers });
   }
 

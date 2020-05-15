@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col d-flex justify-content-end align-items-center pt-2 pr-4" id="brand">
-            <h3>SISTEMAS HIPERBARICOS MEDICOS</h3>
+            <h3>VENTA DE SISTEMAS HIPERBARICOS MEDICOS</h3>
         </div>
     </div>
 </div>
@@ -19,16 +19,25 @@
     <!--PRODUCTO-->
     <div class="row mt-5" *ngFor="let producto of productos | paginate: { itemsPerPage: 3, currentPage: p }">
         <div class="col-6 text-center">
-            <img src="assets/images/hyperbaric.png" class="img-fluid">
+            <img src="{{ url + 'producto/imagen/' + producto.imagen }}" class="img-fluid">
         </div>
         <div class="col-6" id="t-producto">
             <h2>{{producto.nombre}}</h2>
             <p>COD: {{producto.codigo}}</p>
             <p>{{producto.descripcion}}</p>
-            <div class="text-center mt-5">
-                <button class="btn btn-primary">
-                    VER DETALLES
-                </button>
+            <div class="d-flex justify-content-center">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button [routerLink]="['/producto/', producto.id ]" type="button" class="btn btn-primary">VER
+                        MÁS</button>
+                    <button *ngIf="identity" [routerLink]="['/editar-producto', producto.id]" type="button"
+                        class="btn btn-warning">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button *ngIf="identity" type="button" class="btn btn-danger"
+                        (click)="eliminarProducto(producto.id)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
             </div>
         </div>
 

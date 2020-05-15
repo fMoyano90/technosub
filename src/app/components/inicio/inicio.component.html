@@ -132,7 +132,7 @@
     </div>
     <div class="row">
         <div class="col-6" *ngFor="let producto of productos | paginate: { itemsPerPage: 4, currentPage: p }">
-            <img src="assets/images/hyperbaric.png" class="img-fluid">
+            <img src="{{ url + 'producto/imagen/' + producto.imagen }}" class="img-fluid">
             <h3>{{producto.nombre}}</h3>
             <p>{{producto.d_breve}}
                 <br>
@@ -153,54 +153,15 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-3">
+        <div class="col-3" *ngFor="let noticia of noticias | paginate: { itemsPerPage: 4, currentPage: p }">
             <div class="card">
-                <img src="assets/images/about_1.jpg" class="card-img-top" alt="...">
+                <img src="{{ url + 'noticia/imagen/' + noticia.imagen }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Lorem Ipsum</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Ver Más</a>
+                    <h5 class="card-title">{{noticia.titulo}}</h5>
+                    <p class="card-text">{{noticia.t_breve}}</p>
+                    <a [routerLink]="['/noticia/' + noticia.id]" class="btn btn-primary">Ver Más</a>
                 </div>
             </div>
         </div>
-        <div class="col-3">
-            <div class="card">
-                <img src="assets/images/about_3.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Lorem Ipsum</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Ver Más</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card">
-                <img src="assets/images/about_2.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Lorem Ipsum</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Ver Más</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="card">
-                <img src="assets/images/about_1.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Lorem Ipsum</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Ver Más</a>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>

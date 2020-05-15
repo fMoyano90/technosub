@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Producto } from '../../models/producto';
-import { ProductoService } from 'src/app/services/producto.service';
+import { Socio } from '../../models/socio';
+import { SocioService } from 'src/app/services/socio.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 import { global } from '../../services/global';
 import { AngularFileUploaderComponent } from 'angular-file-uploader';
 
 @Component({
-  selector: 'app-crear-producto',
-  templateUrl: './crear-producto.component.html',
-  styleUrls: ['./crear-producto.component.scss'],
-  providers: [ProductoService, UsuarioService],
+  selector: 'app-crear-socio',
+  templateUrl: './crear-socio.component.html',
+  styleUrls: ['./crear-socio.component.scss'],
+  providers: [SocioService, UsuarioService],
 })
-export class CrearProductoComponent implements OnInit {
-  public producto: Producto;
+export class CrearSocioComponent implements OnInit {
+  public socio: Socio;
   public titulo: string;
   public subtitulo: string;
   public editar = false;
@@ -24,7 +24,7 @@ export class CrearProductoComponent implements OnInit {
     formatsAllowed: '.jpg, .png, .gif, .jpeg',
     maxSize: '50',
     uploadAPI: {
-      url: global.url + 'producto/upload',
+      url: global.url + 'socio/upload',
       headers: {
         Authorization: this.usuarioService.getToken(),
       },
@@ -48,30 +48,31 @@ export class CrearProductoComponent implements OnInit {
   private fileUpload1: AngularFileUploaderComponent;
 
   constructor(
-    private productoService: ProductoService,
+    private socioService: SocioService,
     private usuarioService: UsuarioService
   ) {
-    this.producto = new Producto(1, '', '', '', '', '', '');
+    this.socio = new Socio(1, '', '', '', '');
   }
 
   ngOnInit(): void {
-    this.titulo = 'Nuevo Producto';
-    this.subtitulo = 'Crea un nuevo producto';
+    this.titulo = 'Nuevo Socio';
+    this.subtitulo = 'Crea un nuevo socio';
   }
 
-  crearProducto(producto) {
+  // Crear socio
+  crearSocio(socio) {
     const token = this.usuarioService.getToken();
-    console.log(this.producto);
-    this.productoService.create(token, this.producto).subscribe(
+    console.log(this.socio);
+    this.socioService.create(token, this.socio).subscribe(
       (resp) => {
         console.log(resp['estado']);
         // PRODUCTO CREADO EXITOSAMENTE
         Swal.fire({
           icon: 'success',
           title: '¡Buen trabajo!',
-          text: 'El usuario se creo exitosamente.',
+          text: 'El socio se creo exitosamente.',
         });
-        producto.reset();
+        socio.reset();
         this.fileUpload1.resetFileUpload();
       },
       (error) => {
@@ -89,6 +90,6 @@ export class CrearProductoComponent implements OnInit {
   // Subir imagen
   imageUpload(data) {
     const image_data = JSON.parse(data.response);
-    this.producto.imagen = image_data.imagen;
+    this.socio.imagen = image_data.imagen;
   }
 }
